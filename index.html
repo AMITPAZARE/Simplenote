@@ -1,0 +1,94 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Notes App</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="d-flex h-100">
+        <!-- Sidebar -->
+        <nav class="sidebar bg-white border-end">
+            <div class="sidebar-header d-flex justify-content-between align-items-center border-bottom">
+                <h1 class="fs-5 fw-bold mb-0">📝 Notes</h1>
+                <button id="themeToggle" class="btn btn-link p-2 text-dark" title="Toggle theme">
+                    <span class="theme-icon">🌙</span>
+                </button>
+            </div>
+
+            <div class="p-3">
+                <input type="text" id="searchInput" class="form-control form-control-sm" placeholder="Search notes...">
+            </div>
+
+            <div class="folders-section px-3 flex-grow-1 overflow-auto">
+                <div class="d-flex justify-content-between align-items-center mb-2">
+                    <h6 class="text-uppercase text-muted fs-7 fw-bold">Folders</h6>
+                    <button id="createFolderBtn" class="btn btn-link btn-sm p-0">+</button>
+                </div>
+                <div id="foldersList" class="folders-list d-flex flex-column gap-1"></div>
+            </div>
+
+            <div class="border-top p-3">
+                <button id="trashBtn" class="btn btn-outline-secondary w-100 btn-sm">🗑️ Trash</button>
+            </div>
+        </nav>
+
+        <!-- Main Content -->
+        <main class="main-content flex-grow-1 d-flex flex-column overflow-auto">
+            <div class="d-flex justify-content-between align-items-center mb-4 pb-3 border-bottom">
+                <h2 id="currentFolderName" class="mb-0">All Notes</h2>
+                <button id="createNoteBtn" class="btn btn-primary btn-sm">+ New Note</button>
+            </div>
+            <div id="notesGrid" class="row g-3 flex-grow-1"></div>
+            <div id="emptyState" class="empty-state text-center text-muted">No notes yet. Create one to get started!</div>
+        </main>
+    </div>
+
+    <!-- Note Modal -->
+    <div id="noteModal" class="modal fade" tabindex="-1">
+        <div class="modal-dialog modal-dialog-scrollable modal-lg">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <input type="text" id="noteTitle" class="form-control form-control-lg border-0 fw-bold" placeholder="Title">
+                    <div class="btn-group" role="group">
+                        <button id="pinNoteBtn" class="btn btn-outline-secondary btn-sm" title="Pin note">📌</button>
+                        <button id="deleteNoteBtn" class="btn btn-outline-danger btn-sm" title="Delete note">🗑️</button>
+                        <button id="closeModalBtn" type="button" class="btn-close" data-bs-dismiss="modal"></button>
+                    </div>
+                </div>
+                <div class="modal-body">
+                    <textarea id="noteContent" class="form-control border-0" style="min-height: 300px; resize: none;" placeholder="Start typing..."></textarea>
+                    <div class="d-flex justify-content-between align-items-center mt-3 pt-3 border-top">
+                        <span id="lastEdited" class="text-muted small">Edited just now</span>
+                        <select id="noteFolderSelect" class="form-select form-select-sm" style="width: auto;"></select>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Folder Modal -->
+    <div id="folderModal" class="modal fade" tabindex="-1">
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">New Folder</h5>
+                    <button id="closeFolderModalBtn" type="button" class="btn-close" data-bs-dismiss="modal"></button>
+                </div>
+                <div class="modal-body">
+                    <input type="text" id="folderNameInput" class="form-control" placeholder="Folder name...">
+                </div>
+                <div class="modal-footer">
+                    <button id="cancelFolderBtn" type="button" class="btn btn-secondary btn-sm" data-bs-dismiss="modal">Cancel</button>
+                    <button id="saveFolderBtn" type="button" class="btn btn-primary btn-sm">Create</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script type="module" src="script.js"></script>
+</body>
+</html>
